@@ -38,7 +38,8 @@ export const CreateTodo = () => {
         </Switch>
       </div>
       <input
-        name="todoInput"
+        autoComplete="off"
+        aria-label="todoInput"
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
         onKeyPress={(e) => {

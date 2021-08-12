@@ -7,7 +7,7 @@
     "@headlessui/react": "^1.4.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
+    "@testing-library/user-event": "^13.2.1",
     "framer-motion": "^4.1.17",
     "immer": "^9.0.5",
     "react": "^17.0.2",
@@ -20,6 +20,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "test:coverage": "craco test --collectCoverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -41,9 +42,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.1.0",
     "autoprefixer": "^9.8.6",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.24.0",
+    "msw": "^0.34.0",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   }

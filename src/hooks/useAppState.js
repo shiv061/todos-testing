@@ -1,4 +1,10 @@
-import { createContext, useReducer, useMemo, useContext } from 'react';
+import {
+  createContext,
+  useReducer,
+  useMemo,
+  useContext,
+  useEffect,
+} from 'react';
 import produce from 'immer';
 import { v4 } from 'uuid';
 
@@ -9,6 +15,8 @@ const initialState = {
   filter: 'all',
   originalTodos: [],
   dark: true,
+  loading: false,
+  error: null,
 };
 
 const appReducer = (state, action) => {
@@ -20,8 +28,8 @@ const appReducer = (state, action) => {
         data: action.payload.data,
         completed: action.payload.completed,
       };
-      state.todos.push(todoData);
-      state.originalTodos.push(todoData);
+      state.todos.unshift(todoData);
+      state.originalTodos.unshift(todoData);
       break;
     }
     case 'CHANGE_COMPLETED': {
@@ -39,7 +47,6 @@ const appReducer = (state, action) => {
       break;
     }
     case 'FILTER': {
-      console.log(action);
       const filterType = action.payload;
       state.filter = filterType;
       if (filterType === 'all') {
@@ -61,6 +68,19 @@ const appReducer = (state, action) => {
       state.originalTodos = newTodos;
       break;
     }
+    case 'SET_LOADER': {
+      state.loading = action.payload;
+      break;
+    }
+    case 'SET_ERROR': {
+      state.error = action.payload;
+      break;
+    }
+    case 'SET_TODOS': {
+      state.todos = action.payload;
+      state.originalTodos = action.payload;
+      break;
+    }
     default: {
       return state;
     }
@@ -71,6 +91,16 @@ const curriedReducer = produce(appReducer);
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(curriedReducer, initialState);
+
+  useEffect(() => {
+    let timeout;
+    timeout = setTimeout(() => {
+      dispatch({ type: 'SET_ERROR', payload: null });
+    }, 2000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [state.error]);
 
   const contextValue = useMemo(() => {
     return { state, dispatch };

@@ -5,7 +5,7 @@ export const TodoSpace = () => {
   const {
     state: { todos },
   } = useAppState();
-  console.log(todos);
+
   return (
     <div className="rounded-md bg-secondary">
       <div>

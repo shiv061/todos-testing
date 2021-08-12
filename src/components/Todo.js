@@ -1,13 +1,15 @@
 import { Switch } from '@headlessui/react';
+import { motion } from 'framer-motion';
 import { useAppState } from '../hooks/useAppState';
 
 export const Todo = ({ id, data, completed }) => {
   const { dispatch } = useAppState();
 
   return (
-    <div className="flex p-3 py-5">
+    <div className="flex p-3 py-5 z-10 bg-secondary rounded-md">
       <div>
         <Switch
+          aria-label={`${data}-switch`}
           checked={completed}
           onChange={() => {
             dispatch({
@@ -39,6 +41,7 @@ export const Todo = ({ id, data, completed }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          data-testid="remove"
           onClick={() => {
             dispatch({ type: 'REMOVE_TODO', payload: id });
           }}
