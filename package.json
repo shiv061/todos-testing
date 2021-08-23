@@ -21,7 +21,8 @@
     "build": "craco build",
     "test": "craco test",
     "test:coverage": "craco test --collectCoverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -42,8 +43,10 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.0",
     "@testing-library/dom": "^8.1.0",
     "autoprefixer": "^9.8.6",
+    "cypress": "^8.3.0",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.24.0",
     "msw": "^0.34.0",
